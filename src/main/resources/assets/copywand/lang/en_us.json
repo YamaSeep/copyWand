@@ -1,6 +1,9 @@
 {
   "item.copywand.copywanditem":"Copy Wand",
 
+  "key.minetweaks.copywandmode": "Copy Wand Setting",
+  "key.minetweaks.copywand:": "Copy Wand Expansion",
+
   "message.copywand.start_pos": "Start position to X:%d Y:%d Z:%d",
   "message.copywand.end_pos": "End position to X:%d Y:%d Z:%d",
   "message.copywand.copy_done": "Copied %d blocks!",
