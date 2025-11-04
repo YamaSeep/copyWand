@@ -35,9 +35,7 @@ public class CopyWandClient {
 
     }
     @SubscribeEvent
-    public static void onRenderWorld(RenderLevelStageEvent event) {
-
-        //if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_PARTICLES) return;
+    public static void onRenderWorld(RenderLevelStageEvent.AfterParticles event) {
 
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null) return;
