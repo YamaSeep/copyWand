@@ -199,7 +199,7 @@ public class CopyWandItem extends Item {
 
     private static void editShulker(ItemStack shulker,Item editItem,BlockState placeblock) {
         ItemContainerContents contents = shulker.get(DataComponents.CONTAINER);
-/// //pppppppppp
+
         if (contents==null)return;
 
         int size = contents.getSlots();
