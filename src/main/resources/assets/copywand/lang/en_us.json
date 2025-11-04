@@ -1,3 +1,36 @@
 {
-  "item.copywand.copywanditem":"Copy Wand"
+  "item.copywand.copywanditem":"Copy Wand",
+
+  "message.copywand.start_pos": "Start position to X:%d Y:%d Z:%d",
+  "message.copywand.end_pos": "End position to X:%d Y:%d Z:%d",
+  "message.copywand.copy_done": "Copied %d blocks!",
+  "message.copywand.copy_reset": "Copy selection reset.",
+  "message.copywand.copy_limit": "Reach to limit.",
+  "message.copywand.not_enough": "%s : (%d/%d)",
+  "message.copywand.enough_blocks": "All blocks are enough",
+  "message.copywand.not_found": "%s not found",
+  "message.copywand.data_mismatch": "Error: copied block data mismatch!",
+  "message.copywand.double_click.wait": "Click again at X:%d Y:%d Z:%d to paste.",
+  "message.copywand.double_click.cancel_hint": "Right-click elsewhere to cancel.",
+  "message.copywand.double_click.cancelled": "Paste cancelled.",
+
+  "copywand.configuration.Copy": "Copy Setting",
+  "copywand.configuration.copyBlockLimit": "Copy Limit",
+  "copywand.configuration.flowersCopy": "Include flowers",
+  "copywand.configuration.grassCopy": "Include grass",
+  "copywand.configuration.snowCopy": "Include snow",
+  "copywand.configuration.includeLiquid": "Include liquids",
+  "copywand.configuration.includePowderSnow": "Include powder snow",
+  "copywand.configuration.includeBlockEntities": "Include block entities",
+
+  "copywand.configuration.Paste": "Paste Setting",
+  "copywand.configuration.doubleClickPaste": "Allow double-click paste",
+  "copywand.configuration.replaceFlowers": "Replace flowers",
+  "copywand.configuration.replaceLiquid": "Replace liquids",
+  "copywand.configuration.consumeItemsOnPaste": "Consume items",
+  "copywand.configuration.overrideBlocks": "Override all blocks",
+
+  "copywand.configuration.Other": "Other Setting",
+  "copywand.configuration.useShulkerBox": "Use shulker boxes",
+  "copywand.configuration.doubleClickPasteChat": "Show double-click paste tips"
 }
