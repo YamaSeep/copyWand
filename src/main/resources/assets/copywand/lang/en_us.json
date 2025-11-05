@@ -34,6 +34,6 @@
   "copywand.configuration.overrideBlocks": "Override all blocks",
 
   "copywand.configuration.Other": "Other Setting",
-  "copywand.configuration.useShulkerBox": "Use shulker boxes",
-  "copywand.configuration.doubleClickPasteChat": "Show double-click paste tips"
+  "copywand.configuration.useshulkerbox": "Use shulker boxes",
+  "copywand.configuration.doubleclickchat": "Show double-click paste tips"
 }
