@@ -23,7 +23,7 @@
   "copywand.configuration.grassCopy": "Include grass",
   "copywand.configuration.snowCopy": "Include snow",
   "copywand.configuration.includeLiquid": "Include liquids",
-  "copywand.configuration.includePowderSnow": "Include powder snow",
+  "copywand.configuration.includepowdersnow": "Include powder snow",
   "copywand.configuration.includeBlockEntities": "Include block entities",
 
   "copywand.configuration.Paste": "Paste Setting",
