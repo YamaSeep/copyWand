@@ -109,7 +109,7 @@ public class CopyWandItem extends Item {
         }
 
         if (player.gameMode() == GameType.SURVIVAL && Config.CONSUME_ITEMS.get()) {
-            if (!isEnoughBlocks(getBlockNums(pos, state), player, level)) return;
+            if (!isEnoughBlocks(pos, state, player, stack,level)) return;
             else {
                 player.displayClientMessage(Component.translatable("message.copywand.enough_blocks"), false);
             }
@@ -214,8 +214,11 @@ public class CopyWandItem extends Item {
         shulker.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(slots));
     }
 
-    private static boolean isEnoughBlocks(Map<Block, List<BlockState>> map, Player player, Level level) {
+    private static boolean isEnoughBlocks(List<BlockPos> pos,List<BlockState> states, Player player,ItemStack itemstack,Level level) {
+
         boolean isEnough = true;
+
+        Map<Block, List<BlockState>> map=getBlockNums(pos,states,player,itemstack,level);
 
         player.displayClientMessage(Component.literal("---------------------"), false);
 
@@ -311,7 +314,7 @@ public class CopyWandItem extends Item {
         return isWaterLoggedEnough && isEnough;
     }
 
-    private static Map<Block, List<BlockState>> getBlockNums(List<BlockPos> pos, List<BlockState> states) {
+    private static Map<Block, List<BlockState>> getBlockNums(List<BlockPos> pos, List<BlockState> states,Player player,ItemStack stack,Level level) {
         Map<Block, List<BlockState>> stateMap = new HashMap<>();
 
         Map<BlockPos, BlockState> blockStates = new HashMap<>();
@@ -324,6 +327,14 @@ public class CopyWandItem extends Item {
         for (Map.Entry<BlockPos, BlockState> entry : blockStates.entrySet()) {
             BlockState state = entry.getValue();
             Block block = state.getBlock();
+            BlockPos dxyz = CopyWandClient.getDxyz(player, stack);
+            if (dxyz==null)continue;
+            BlockPos pastepos=entry.getKey().offset(dxyz);
+            if (!Config.OVERRIDE_BLOCKS.get()){
+                if (!level.getBlockState(pastepos).is(Blocks.AIR))continue;//ブロックありでパス
+                if (!Config.REPLACE_FLOWERS.get()&&level.getBlockState(pastepos).is(BlockTags.FLOWERS))continue;//hana paas
+                if (!Config.REPLACE_LIQUID.get()&&level.getBlockState(pastepos).hasProperty(BlockStateProperties.LEVEL))continue;
+            }
             stateMap.computeIfAbsent(block, k -> new ArrayList<>()).add(state);
         }
         return stateMap;
