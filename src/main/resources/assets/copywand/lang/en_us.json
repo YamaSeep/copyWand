@@ -4,8 +4,8 @@
   "key.minetweaks.copywandmode": "Copy Wand Setting",
   "key.minetweaks.copywand:": "Copy Wand Expansion",
 
-  "message.copywand.start_pos": "Start position to X:%d Y:%d Z:%d",
-  "message.copywand.end_pos": "End position to X:%d Y:%d Z:%d",
+  "message.copywand.start_pos": "Start position X:%d Y:%d Z:%d",
+  "message.copywand.end_pos": "End position X:%d Y:%d Z:%d",
   "message.copywand.copy_done": "Copied %d blocks!",
   "message.copywand.copy_reset": "Copy selection reset.",
   "message.copywand.copy_limit": "Reach to limit.",
@@ -13,7 +13,7 @@
   "message.copywand.enough_blocks": "All blocks are enough",
   "message.copywand.not_found": "%s not found",
   "message.copywand.data_mismatch": "Error: copied block data mismatch!",
-  "message.copywand.double_click.wait": "Click again at X:%d Y:%d Z:%d to paste.",
+  "message.copywand.double_click.wait": "Right-Click again to paste. (X:%d Y:%d Z:%d)",
   "message.copywand.double_click.cancel_hint": "Right-click elsewhere to cancel.",
   "message.copywand.double_click.cancelled": "Paste cancelled.",
 
