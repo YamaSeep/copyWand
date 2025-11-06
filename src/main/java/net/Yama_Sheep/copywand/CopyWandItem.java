@@ -109,9 +109,11 @@ public class CopyWandItem extends Item {
         }
 
         if (player.gameMode() == GameType.SURVIVAL && Config.CONSUME_ITEMS.get()) {
-            if (!isEnoughBlocks(pos, state, player, stack,level)) return;
-            else {
-                player.displayClientMessage(Component.translatable("message.copywand.enough_blocks"), false);
+            //enough:0 notEnough:1 already:2
+            switch (isEnoughBlocks(pos, state, player, stack,level)){
+                case 0:player.displayClientMessage(Component.translatable("message.copywand.enough_blocks"), false);break;
+                case 1:return;
+                case 2:player.displayClientMessage(Component.translatable("message.copywand.no_place_blocks").withColor(color), false);
             }
         }
 
@@ -214,11 +216,12 @@ public class CopyWandItem extends Item {
         shulker.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(slots));
     }
 
-    private static boolean isEnoughBlocks(List<BlockPos> pos,List<BlockState> states, Player player,ItemStack itemstack,Level level) {
+    private static int isEnoughBlocks(List<BlockPos> pos,List<BlockState> states, Player player,ItemStack itemstack,Level level) {
 
         boolean isEnough = true;
-
         Map<Block, List<BlockState>> map=getBlockNums(pos,states,player,itemstack,level);
+
+        if (map.isEmpty())return 2;
 
         player.displayClientMessage(Component.literal("---------------------"), false);
 
@@ -311,7 +314,7 @@ public class CopyWandItem extends Item {
                 isWaterLoggedEnough=false;
             }
         }
-        return isWaterLoggedEnough && isEnough;
+        return (isWaterLoggedEnough && isEnough)?0:1;
     }
 
     private static Map<Block, List<BlockState>> getBlockNums(List<BlockPos> pos, List<BlockState> states,Player player,ItemStack stack,Level level) {
@@ -327,14 +330,23 @@ public class CopyWandItem extends Item {
         for (Map.Entry<BlockPos, BlockState> entry : blockStates.entrySet()) {
             BlockState state = entry.getValue();
             Block block = state.getBlock();
+
             BlockPos dxyz = CopyWandClient.getDxyz(player, stack);
-            if (dxyz==null)continue;
-            BlockPos pastepos=entry.getKey().offset(dxyz);
-            if (!Config.OVERRIDE_BLOCKS.get()){
-                if (!level.getBlockState(pastepos).is(Blocks.AIR))continue;//ブロックありでパス
-                if (!Config.REPLACE_FLOWERS.get()&&level.getBlockState(pastepos).is(BlockTags.FLOWERS))continue;//hana paas
-                if (!Config.REPLACE_LIQUID.get()&&level.getBlockState(pastepos).hasProperty(BlockStateProperties.LEVEL))continue;
+            if (dxyz == null) continue;
+
+            BlockPos pastePos = entry.getKey().offset(dxyz);
+            BlockState targetState = level.getBlockState(pastePos);
+            boolean canReplace = false;
+            if (Config.OVERRIDE_BLOCKS.get()) {
+                canReplace = true; // すべて上書き
+            } else if (targetState.isAir()) {
+                canReplace = true; // 空気なら常に上書き
+            } else if (targetState.is(BlockTags.FLOWERS) && Config.REPLACE_FLOWERS.get()) {
+                canReplace = true; // 花ブロックは設定がtrueなら上書き
+            } else if (targetState.hasProperty(BlockStateProperties.LEVEL) && Config.REPLACE_LIQUID.get()) {
+                canReplace = true; // 液体ブロックは設定がtrueなら上書き
             }
+            if (!canReplace) continue;
             stateMap.computeIfAbsent(block, k -> new ArrayList<>()).add(state);
         }
         return stateMap;

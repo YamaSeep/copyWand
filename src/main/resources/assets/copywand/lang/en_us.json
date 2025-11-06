@@ -16,6 +16,7 @@
   "message.copywand.double_click.wait": "Right-Click again to paste. (X:%d Y:%d Z:%d)",
   "message.copywand.double_click.cancel_hint": "Right-click elsewhere to cancel.",
   "message.copywand.double_click.cancelled": "Paste cancelled.",
+  "message.copywand.no_place_blocks": "There's no place to place",
 
   "copywand.configuration.Copy": "Copy Setting",
   "copywand.configuration.copyBlockLimit": "Copy Limit",
